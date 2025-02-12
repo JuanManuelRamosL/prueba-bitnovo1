@@ -1,0 +1,53 @@
+.payment-form {
+    margin: 0 auto;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    border-radius: 17px;
+    box-shadow: 5px 5p 5px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.form-group label {
+    margin: 15px;
+}
+
+.form-group input {
+    margin: 15px;
+    height: 45px;
+    border: 2px solid #e4e4e4;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.crypto-selector {
+    margin: 15px;
+    height: 45px;
+    border-radius: 7px;
+}
+
+.submit-button {
+    width: 95%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    background-color: #007bff;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
