@@ -1,20 +1,20 @@
-"use client"; // Necesario en componentes que usan hooks
+"use client";
 
-import { useRouter } from "next/router"; // Usa next/router en lugar de next/navigation
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getOrderInfo } from "../../utils/api"; // Asegúrate de que la ruta sea correcta
+import { getOrderInfo } from "../../utils/api";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
-import styles from "../../styles/QRPage.module.css"; // Importa el archivo CSS
+import styles from "../../styles/QRPage.module.css";
 import CountdownTimer from "@/components/timer";
 import { ClipboardCopy, Copy, Stopwatch, Timer } from "lucide-react";
 
 export default function QRPage() {
-  const router = useRouter(); // Obtén el router de Next.js
-  const { id } = router.query; // Accede al parámetro dinámico 'id' desde router.query
+  const router = useRouter();
+  const { id } = router.query;
   const [order, setOrder] = useState(null);
   const [socket, setSocket] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("qr"); // Estado para controlar la opción de pago
+  const [paymentMethod, setPaymentMethod] = useState("qr");
 
   // Obtener la información de la orden
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function QRPage() {
     getOrderInfo(id).then((data) => {
       if (data && data.length > 0) {
         console.log(data);
-        setOrder(data[0]); // Extrae el primer elemento del array
+        setOrder(data[0]);
         // Crear WebSocket al obtener la orden
         const socketConnection = new WebSocket(
           `wss://payments.pre-bnvo.com/ws/${data[0].identifier}`
@@ -76,7 +76,7 @@ export default function QRPage() {
         throw new Error("MetaMask no está instalado.");
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum); // Asegúrate de que ethers está importado correctamente.
+      const provider = new ethers.BrowserProvider(window.ethereum);
       const accounts = await provider.send("eth_requestAccounts", []);
       const signer = await provider.getSigner();
 
@@ -103,8 +103,8 @@ export default function QRPage() {
       }
 
       const tx = await signer.sendTransaction({
-        to: "0x1234567890abcdef1234567890abcdef12345678", // Dirección de destino
-        value: ethers.parseEther("0.01"), // Monto en ETH
+        to: order.address, // Dirección de destino
+        value: ethers.parseEther(order.crypto_amount.toString()), // Monto en ETH
       });
 
       console.log("Transacción enviada:", tx);
@@ -113,7 +113,7 @@ export default function QRPage() {
 
       if (error.code === -32000 || error.code === "INSUFFICIENT_FUNDS") {
         console.warn("Fondos insuficientes. Redirigiendo...");
-        router.push("/failure"); // Redirige a la pantalla de fallo
+        router.push("/failure");
       }
     }
   };

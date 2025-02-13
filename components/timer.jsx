@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/router";
 export default function CountdownTimer({ expiredTime }) {
+  const router = useRouter();
   const calculateTimeLeft = () => {
     const expirationDate = new Date(expiredTime).getTime();
     const now = new Date().getTime();
@@ -20,7 +21,10 @@ export default function CountdownTimer({ expiredTime }) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    if (timeLeft.expired) return;
+    if (timeLeft.expired) {
+      router.push("/failure"); // Redirige cuando expira
+      return;
+    }
 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
