@@ -7,7 +7,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
 import styles from "../../styles/QRPage.module.css"; // Importa el archivo CSS
 import CountdownTimer from "@/components/timer";
-import { Stopwatch, Timer } from "lucide-react";
+import { ClipboardCopy, Copy, Stopwatch, Timer } from "lucide-react";
 
 export default function QRPage() {
   const router = useRouter(); // Obtén el router de Next.js
@@ -84,6 +84,13 @@ export default function QRPage() {
     } catch (error) {
       console.error("Error al conectar MetaMask:", error.message);
     }
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => alert("Texto copiado"))
+      .catch((err) => console.error("Error al copiar: ", err));
   };
 
   const sendPayment = async () => {
@@ -212,10 +219,40 @@ export default function QRPage() {
         <div className={styles.cryptoInfo}>
           <span>
             Envío: {order.crypto_amount} {order.currency_id}
+            <Copy
+              className={styles.copyIcon}
+              size={18}
+              onClick={() =>
+                copyToClipboard(`${order.crypto_amount} ${order.currency_id}`)
+              }
+            />
           </span>
-          <span>{order.address}</span>
-          {order.tag_memo && <span>Tag/Memo: {order.tag_memo}</span>}
-          <span>Estado: {order.status}</span>
+          <span>
+            {order.address}
+            <Copy
+              className={styles.copyIcon}
+              size={18}
+              onClick={() => copyToClipboard(order.address)}
+            />
+          </span>
+          {order.tag_memo && (
+            <span>
+              Tag/Memo: {order.tag_memo}
+              <Copy
+                className={styles.copyIcon}
+                size={18}
+                onClick={() => copyToClipboard(order.tag_memo)}
+              />
+            </span>
+          )}
+          <span>
+            Estado: {order.status}
+            <Copy
+              className={styles.copyIcon}
+              size={18}
+              onClick={() => copyToClipboard(order.status)}
+            />
+          </span>
         </div>
       </div>
     </div>
