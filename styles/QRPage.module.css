@@ -112,3 +112,11 @@
 .reloj {
   transform: translateY(3px);
 }
+
+.metaMaskIcon {
+  width: 270px;
+  height: 150px;
+  margin-left: -4px;
+  margin-right: -4px;
+  margin-bottom: -4px;
+}

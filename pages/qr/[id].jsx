@@ -198,13 +198,13 @@ export default function QRPage() {
 
         {paymentMethod === "web3" && (
           <div className={styles.web3Container}>
-            <button className={styles.option} onClick={sendPayment}>
+            <button onClick={sendPayment}>
               <img
                 src="https://www.carlosmaiz.com/wp-content/uploads/2024/11/MetaMask.png"
                 alt="MetaMask"
                 width="20"
+                className={styles.metaMaskIcon}
               />{" "}
-              Pagar con MetaMask
             </button>
           </div>
         )}
@@ -216,11 +216,6 @@ export default function QRPage() {
           <span>{order.address}</span>
           {order.tag_memo && <span>Tag/Memo: {order.tag_memo}</span>}
           <span>Estado: {order.status}</span>
-          <span>
-            Fecha de expiración:{" "}
-            {new Date(order.expired_time).toLocaleDateString()}{" "}
-            {new Date(order.expired_time).toLocaleTimeString()}
-          </span>
         </div>
       </div>
     </div>
