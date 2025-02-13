@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "./fail.css"; // Importa el archivo CSS
+import "../styles/fail.css"; // Importa el archivo CSS
 
 export default function Failed() {
   return (

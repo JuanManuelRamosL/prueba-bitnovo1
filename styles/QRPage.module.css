@@ -110,3 +110,13 @@
   align-items: center;
   line-height: 30px;
 }
+
+.reloj {
+  transform: translateY(3px);
+}
+.cryptoInfo {
+  margin-bottom: 28px;
+}
+/* * {
+  font-family: "Montserrat", serif;
+} */

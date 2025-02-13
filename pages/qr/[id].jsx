@@ -6,6 +6,8 @@ import { getOrderInfo } from "../../utils/api"; // Asegúrate de que la ruta sea
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
 import styles from "../../styles/QRPage.module.css"; // Importa el archivo CSS
+import CountdownTimer from "@/components/timer";
+import { Stopwatch, Timer } from "lucide-react";
 
 export default function QRPage() {
   const router = useRouter(); // Obtén el router de Next.js
@@ -161,18 +163,25 @@ export default function QRPage() {
         <div className={styles.containerTitleResumen}>
           <h2 className={styles.title}>Realiza el Pago</h2>
         </div>
+        <div className={styles.cryptoInfo}>
+          <span>
+            <Timer size={24} strokeWidth={2} className={styles.reloj} />
+            {"      "}
+            <CountdownTimer expiredTime={order.expired_time} />
+          </span>
+        </div>
         <div className={styles.paymentOptions}>
           <button
             className={styles.option}
             onClick={() => setPaymentMethod("qr")}
           >
-            📷 SmarLQR
+            SmarLQR
           </button>
           <button
             className={styles.option}
             onClick={() => setPaymentMethod("web3")}
           >
-            🦊 Web3
+            Web3
           </button>
         </div>
 
