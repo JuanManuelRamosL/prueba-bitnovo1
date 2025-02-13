@@ -4,7 +4,6 @@ import { useState } from "react";
 import { createOrder } from "../utils/api";
 import { useRouter } from "next/navigation";
 import CryptoSelector from "./criptoSelector";
-//import "./payment.css";
 
 export default function PaymentForm() {
   const [amount, setAmount] = useState("");

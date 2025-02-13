@@ -72,6 +72,7 @@ export default function QRPage() {
   const connectWallet = async () => {
     try {
       if (!window.ethereum) {
+        alert("MetaMask no está instalado.");
         throw new Error("MetaMask no está instalado.");
       }
 
@@ -122,9 +123,9 @@ export default function QRPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerGeneral}>
       <div className={styles.containerResumen}>
-        <div className={styles.containerTitleResumen}>
+        <div className={styles.containerTitleResumenPedido}>
           <h2 className={styles.title}>Resumen del pedido</h2>
         </div>
         <div className={styles.containerInfoResumen}>
@@ -167,92 +168,92 @@ export default function QRPage() {
       </div>
 
       <div className={styles.containerRealizarPago}>
-        <div className={styles.containerTitleResumen}>
+        <div className={styles.containerTitleResumenPago}>
           <h2 className={styles.title}>Realiza el Pago</h2>
         </div>
-        <div className={styles.cryptoInfo}>
-          <span>
-            <Timer size={24} strokeWidth={2} className={styles.reloj} />
-            {"      "}
-            <CountdownTimer expiredTime={order.expired_time} />
-          </span>
-        </div>
-        <div className={styles.paymentOptions}>
-          <button
-            className={styles.option}
-            onClick={() => setPaymentMethod("qr")}
-          >
-            SmarLQR
-          </button>
-          <button
-            className={styles.option}
-            onClick={() => setPaymentMethod("web3")}
-          >
-            Web3
-          </button>
-        </div>
-
-        {paymentMethod === "qr" && (
-          <div className={styles.qrContainer}>
-            <QRCodeCanvas
-              value={`bitcoin:${order.address}?amount=${order.crypto_amount}`}
-              size={256}
-              className={styles.qrCode}
-            />
-            <p>Escanea el QR para realizar el pago.</p>
+        <div className={styles.containerInfoPago}>
+          <div className={styles.cryptoInfo}>
+            <span>
+              <Timer size={24} strokeWidth={2} className={styles.reloj} />
+              {"      "}
+              <CountdownTimer expiredTime={order.expired_time} />
+            </span>
           </div>
-        )}
-
-        {paymentMethod === "web3" && (
-          <div className={styles.web3Container}>
-            <button onClick={sendPayment}>
-              <img
-                src="https://www.carlosmaiz.com/wp-content/uploads/2024/11/MetaMask.png"
-                alt="MetaMask"
-                width="20"
-                className={styles.metaMaskIcon}
-              />{" "}
+          <div className={styles.paymentOptions}>
+            <button
+              className={`${styles.option} ${
+                paymentMethod === "qr" ? styles.active : ""
+              }`}
+              onClick={() => setPaymentMethod("qr")}
+            >
+              SmarLQR
+            </button>
+            <button
+              className={`${styles.option} ${
+                paymentMethod === "web3" ? styles.active : ""
+              }`}
+              onClick={() => setPaymentMethod("web3")}
+            >
+              Web3
             </button>
           </div>
-        )}
 
-        <div className={styles.cryptoInfo}>
-          <span>
-            Envío: {order.crypto_amount} {order.currency_id}
-            <Copy
-              className={styles.copyIcon}
-              size={18}
-              onClick={() =>
-                copyToClipboard(`${order.crypto_amount} ${order.currency_id}`)
-              }
-            />
-          </span>
-          <span>
-            {order.address}
-            <Copy
-              className={styles.copyIcon}
-              size={18}
-              onClick={() => copyToClipboard(order.address)}
-            />
-          </span>
-          {order.tag_memo && (
+          {paymentMethod === "qr" && (
+            <div className={styles.qrContainer}>
+              <QRCodeCanvas
+                value={`bitcoin:${order.address}?amount=${order.crypto_amount}`}
+                size={120}
+                className={styles.qrCode}
+              />
+              {/* <p>Escanea el QR para realizar el pago.</p> */}
+            </div>
+          )}
+
+          {paymentMethod === "web3" && (
+            <div className={styles.web3Container}>
+              <button onClick={sendPayment} className={styles.web3Button}>
+                <img
+                  src="https://www.carlosmaiz.com/wp-content/uploads/2024/11/MetaMask.png"
+                  alt="MetaMask"
+                  className={styles.metaMaskIcon}
+                />{" "}
+              </button>
+            </div>
+          )}
+
+          <div className={styles.cryptoInfo}>
             <span>
-              Tag/Memo: {order.tag_memo}
+              Envío:{" "}
+              <b>
+                {order.crypto_amount} {order.currency_id}
+              </b>
               <Copy
                 className={styles.copyIcon}
                 size={18}
-                onClick={() => copyToClipboard(order.tag_memo)}
+                onClick={() =>
+                  copyToClipboard(`${order.crypto_amount} ${order.currency_id}`)
+                }
               />
             </span>
-          )}
-          <span>
-            Estado: {order.status}
-            <Copy
-              className={styles.copyIcon}
-              size={18}
-              onClick={() => copyToClipboard(order.status)}
-            />
-          </span>
+            <span>
+              {order.address}
+              <Copy
+                className={styles.copyIcon}
+                size={18}
+                onClick={() => copyToClipboard(order.address)}
+              />
+            </span>
+            {order.tag_memo && (
+              <span>
+                Tag/Memo: {order.tag_memo}
+                <Copy
+                  className={styles.copyIcon}
+                  size={18}
+                  onClick={() => copyToClipboard(order.tag_memo)}
+                />
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

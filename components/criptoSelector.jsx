@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { getCurrencies } from "../utils/api";
+import { ChevronDown, ChevronRight } from "lucide-react";
 //import "./CryptoSelector.css"; // Importamos los estilos
 
 export default function CryptoSelector({ onSelect, amount }) {
@@ -33,7 +34,17 @@ export default function CryptoSelector({ onSelect, amount }) {
             </span>
           </div>
         ) : (
-          <span>Seleccionar criptomoneda</span>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "8px",
+              width: "100%",
+            }}
+          >
+            Seleccionar criptomoneda <ChevronDown size={16} />
+          </span>
         )}
       </div>
 
@@ -51,17 +62,36 @@ export default function CryptoSelector({ onSelect, amount }) {
               filteredCurrencies.map((cur) => (
                 <li
                   key={cur.symbol}
-                  className="crypto-item"
+                  className={`crypto-item ${
+                    selected?.symbol === cur.symbol ? "selected" : ""
+                  }`}
                   onClick={() => {
                     setSelected(cur);
                     onSelect(cur.symbol);
                     setOpen(false);
                   }}
                 >
-                  <img src={cur.image} alt={cur.name} />
-                  <span>
-                    {cur.name} ({cur.symbol})
-                  </span>
+                  <img src={cur.image} alt={cur.name} className="crypto-icon" />
+                  <div className="crypto-info">
+                    <span className="crypto-name">{cur.name}</span>
+                    <span className="crypto-symbol">{cur.symbol}</span>
+                  </div>
+                  {selected?.symbol === cur.symbol && (
+                    <span className="check-icon">✔</span>
+                  )}
+                  {selected?.symbol != cur.symbol && (
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "8px",
+                        width: "100%",
+                      }}
+                    >
+                      Seleccionar criptomoneda <ChevronRight size={16} />
+                    </span>
+                  )}
                 </li>
               ))
             ) : (

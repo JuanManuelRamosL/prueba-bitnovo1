@@ -1,103 +1,130 @@
-.container {
+.containerGeneral {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  gap: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.containerTitleResumenPedido {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .title {
-  text-align: left; /* Cambiado de start a left */
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.containerTitleResumen {
-  width: 90%;
+.containerTitleResumenPedido,
+.containerTitleResumenPago {
   display: flex;
-  align-items: flex-start; /* Cambiado de start a flex-start */
+  justify-content: start;
+  width: 90%;
 }
 
-.containerResumen {
-  width: 73%;
+.containerInfoResumen,
+.containerInfoPago {
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Cambiado de start a flex-start */
   align-items: center;
+  background-color: #f9fafc;
+  border-radius: 17px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .containerInfoResumen {
-  width: 90%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Cambiado de start a flex-start */
-  align-items: flex-start; /* Cambiado de start a flex-start */
-  gap: 20px;
-  padding: 25px;
-  border-radius: 17px;
-  background-color: #f9fafc;
+  padding: 20px;
 }
 
-.summaryItem {
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
-  margin-left: 20px;
-  border-bottom: 1px solid #afafaf;
+.containerInfoPago {
+  height: 80vh;
 }
 
+.summaryItem,
 .summaryItemEspecial {
-  width: 95%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 10px;
-  margin-left: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #afafaf;
 }
 
 .spanText {
   font-weight: 500;
-  transform: translateY(-15px);
-}
-
-.containerRealizarPago {
-  width: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 .paymentOptions {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .option {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 35px;
   border: none;
-  border-radius: 27px;
-  background-color: #035ac5;
-  color: #fff;
+  border-radius: 20px;
+  background-color: #e3e7ec;
+  color: #000;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .option:hover {
   background-color: #0340a2;
+  color: #fff;
 }
 
 .qrContainer {
+  max-width: 130px;
+  max-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
-  padding: 15px;
-  margin-top: 20px;
+  padding: 10px;
+  margin: 0 auto;
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.web3Container {
+  max-width: 160px;
+  max-height: 90px;
+  margin-bottom: 70px;
+  /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); */
+}
+
+.metaMaskIcon {
+  width: 100%;
+  height: auto;
+  /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); */
+  /* padding: 10px; */
+}
+
+.web3Button {
+  border-radius: 10px;
+  max-width: 190px;
+  height: 150px;
+  background-color: #fff;
+  border: #afafaf 1px solid;
+  transition: 0.4s;
+  padding: 10px;
 }
 
 .cryptoInfo {
@@ -106,23 +133,53 @@
   justify-content: center;
   align-items: center;
   line-height: 30px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .reloj {
   transform: translateY(3px);
 }
 
-.metaMaskIcon {
-  width: 270px;
-  height: 150px;
-  margin-left: -4px;
-  margin-right: -4px;
-  margin-bottom: -4px;
+.web3Button:hover {
+  border: #000000 1px solid;
 }
 
 .copyIcon {
   color: #3989eb;
   margin-left: 10px;
   transform: translateY(5px);
+  cursor: pointer;
+}
+
+.active {
+  background: #0057ff;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .containerGeneral {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .containerResumen,
+  .containerRealizarPago {
+    width: 45%;
+    margin-bottom: 0;
+  }
+
+  .title {
+    text-align: left;
+  }
+
+  .paymentOptions {
+    gap: 20px;
+  }
+
+  .option {
+    width: 100px;
+    height: 40px;
+  }
 }
