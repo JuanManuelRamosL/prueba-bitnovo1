@@ -2,27 +2,25 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /* background-color: blue; */
   gap: 30px;
 }
 
 .title {
-  text-align: start;
+  text-align: left; /* Cambiado de start a left */
 }
 
 .containerTitleResumen {
   width: 90%;
   display: flex;
-  align-items: start;
+  align-items: flex-start; /* Cambiado de start a flex-start */
 }
 
 .containerResumen {
   width: 73%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Cambiado de start a flex-start */
   align-items: center;
-  /* background-color: red; */
 }
 
 .containerInfoResumen {
@@ -30,8 +28,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start; /* Cambiado de start a flex-start */
+  align-items: flex-start; /* Cambiado de start a flex-start */
   gap: 20px;
   padding: 25px;
   border-radius: 17px;
@@ -53,7 +51,6 @@
   justify-content: space-between;
   margin: 10px;
   margin-left: 20px;
-  /* border-bottom: 1px solid #afafaf; */
 }
 
 .spanText {
@@ -109,14 +106,9 @@
   justify-content: center;
   align-items: center;
   line-height: 30px;
+  margin-bottom: 28px;
 }
 
 .reloj {
   transform: translateY(3px);
 }
-.cryptoInfo {
-  margin-bottom: 28px;
-}
-/* * {
-  font-family: "Montserrat", serif;
-} */
