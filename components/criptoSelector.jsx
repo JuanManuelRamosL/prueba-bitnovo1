@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { getCurrencies } from "../utils/api";
-import "./CryptoSelector.css"; // Importamos los estilos
+//import "./CryptoSelector.css"; // Importamos los estilos
 
 export default function CryptoSelector({ onSelect, amount }) {
   const [currencies, setCurrencies] = useState([]);

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "../styles/success.css"; // Importa el archivo CSS
+//import "../styles/success.css"; // Importa el archivo CSS
 
 export default function Success() {
   return (
