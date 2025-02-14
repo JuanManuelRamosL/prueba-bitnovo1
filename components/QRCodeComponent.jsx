@@ -1,13 +1,13 @@
-"use client"; // ✅ Indica que este es un Client Component
+"use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Importar desde next/navigation
+import { useRouter } from "next/navigation";
 import { getOrderInfo } from "../utils/api";
-import { QRCodeCanvas } from "qrcode.react"; // ✅ Importación corregida
+import { QRCodeCanvas } from "qrcode.react";
 
 export default function QRCodeComponent({ orderId }) {
   const [order, setOrder] = useState(null);
-  const router = useRouter(); // ✅ Ahora no debería dar error
+  const router = useRouter();
 
   useEffect(() => {
     if (!orderId) return;
